@@ -2,7 +2,47 @@
 
 This quiz was built using Gravity Forms, Advanced Custom Fields and WPML. The answers are multiple-choice and are always displayed in a particular order. The results are based on the answers you choose.
 
-Install the theme and import the ACF fields from acf.json in the extras folder.
+## How to install the theme and import
+
+### Installation
+
+To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+
+```bash
+# Clone this repository into your wordpress theme folder
+$ git clone https://github.com/jnds/wp-template-toolkit
+
+# Go into the repository
+$ cd wp-template-toolkit
+
+# Install dependencies
+$ npm install
+```
+
+
+### Usage
+
+```bash
+
+# Run the gulp watch task to monitor changes in the file system. As soon as you save a file, it is preprocessed as needed and the browser is refreshed
+
+$ gulp watch
+
+# Run the gulp build task to erase existing build and theme folders and compile the latest version
+
+$ gulp build
+
+```
+## Required Wordpress Plugins
+- acfml
+- advanced custom fields preprocessed
+- gravity-forms-wcag-20-form-fields
+- gravityforms
+- shariff
+- sitepress-multilingual-cms
+
+### How to import ACF fields
+Find acf.json in the extras folder in the theme and import from the wordpress dashboard for the ACF fields from
 
 ## 1. How to create the form
 
@@ -26,17 +66,17 @@ Since we have assigned an ID to each field, we can then assign custom values in 
 
 Next we define an array of characters and assign there initial score as 0. To identify each character we use the slug from the characters url. The page will redirect to this URL depending on the outcome of the quiz.
 
-$characters = array(
-      "strippenzieherin" => 0,
-      "daten-sammlerin" => 0,
-      "star-autorin" => 0,
-      "kulturagentin" => 0,
-      "technik-optimiererin" => 0,
-      "abfrage-genie" => 0,
-      "aktivistin" => 0,
-      "dokumentatorin" => 0,
-      "spenderin" => 0
-  );
+    $characters = array(
+          "strippenzieherin" => 0,
+          "daten-sammlerin" => 0,
+          "star-autorin" => 0,
+          "kulturagentin" => 0,
+          "technik-optimiererin" => 0,
+          "abfrage-genie" => 0,
+          "aktivistin" => 0,
+          "dokumentatorin" => 0,
+          "spenderin" => 0
+    );
 
 Depending on which answer is chosen we can assign a different value to each character. In order to assign points to each character we use a switch condition with cases 1,2,3,4 corresponding to the answer for each question.
 
@@ -78,46 +118,47 @@ E.g. 1 When top character is technik-optimiererin or "abfrage-genie" check if th
       }
     }
 
- E.g. 2 Default character for points less than 10
+E.g. 2 Default character for points less than 10
 
- if ($characters[$chosenCharacter] <= 10){
-    $chosenCharacter = "spenderin";
- }
+   if ($characters[$chosenCharacter] <= 10){
+      $chosenCharacter = "spenderin";
+   }
 
 
 Finally set the value of the hidden field
-$_POST["input_9"] = $chosenCharacter;
+
+    $_POST["input_9"] = $chosenCharacter;
 
 
 ### 2b. How to Display Results:
 
 Next we use the gform_after_submission hook to redirect to the page of the chosen character. We can also use the ICL_LANGUAGE_CODE option to map the the original URLs to different languages
 
-add_action( 'gform_after_submission', 'wiki_redirect_after_submission' );
+  add_action( 'gform_after_submission', 'wiki_redirect_after_submission' );
 
-function wiki_redirect_after_submission( $form ) {
+  function wiki_redirect_after_submission( $form ) {
 
-  $chosenCharacter = $_POST["input_9"];
+    $chosenCharacter = $_POST["input_9"];
 
-  if(ICL_LANGUAGE_CODE=='en'){
-    $slugs = array(
-      "strippenzieherin" => "stage-manager",
-      "daten-sammlerin" => "data-collector",
-      "star-autorin" => "literary-star",
-      "kulturagentin" => "cultural-ambassador",
-      "technik-optimiererin" => "tech-optimizer",
-      "abfrage-genie" => "master-of-queries",
-      "aktivistin" => "activist",
-      "dokumentatorin" => "documenter",
-      "spenderin" => "donor"
-    );
+    if(ICL_LANGUAGE_CODE=='en'){
+      $slugs = array(
+        "strippenzieherin" => "stage-manager",
+        "daten-sammlerin" => "data-collector",
+        "star-autorin" => "literary-star",
+        "kulturagentin" => "cultural-ambassador",
+        "technik-optimiererin" => "tech-optimizer",
+        "abfrage-genie" => "master-of-queries",
+        "aktivistin" => "activist",
+        "dokumentatorin" => "documenter",
+        "spenderin" => "donor"
+      );
 
-    $chosenCharacter = $slugs[$chosenCharacter];
-    $url = home_url().'gang/'.$chosenCharacter;
+      $chosenCharacter = $slugs[$chosenCharacter];
+      $url = home_url().'gang/'.$chosenCharacter;
+    }
+    else{
+      $url = home_url().'/gang/'.$chosenCharacter;
+    }
+
+    wp_redirect( $url ); exit;
   }
-  else{
-    $url = home_url().'/gang/'.$chosenCharacter;
-  }
-
-  wp_redirect( $url ); exit;
-}

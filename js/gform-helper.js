@@ -11,8 +11,6 @@ jQuery(document).ready(function(){
       jQuery('.app').addClass('started');
       jQuery('.gform_wrapper form li.screen').addClass('active');
 
-      // console.log('neither ?');
-
       if(  jQuery('.gform_page').last().is(':visible') )  {
 
         jQuery('.gfield_radio input[type=radio]').bind("click", function() {
@@ -30,7 +28,6 @@ jQuery(document).ready(function(){
           var that = this;
           setTimeout(function(){
             var link = jQuery(that).closest('.gform_page').find('.gform_button'); //#gform_submit_button_1
-            //console.log(link);
             link.click();
           }, 2000);
 
@@ -38,7 +35,6 @@ jQuery(document).ready(function(){
       }else{
         jQuery('.gfield_radio input[type=radio]').bind("click", function() {
           var link = jQuery(this).closest('.gform_page').find('.gform_page_footer .gform_next_button.button');
-          // console.log(link);
           link.click();
         });
       }

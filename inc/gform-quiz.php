@@ -16,7 +16,7 @@ function wm_evaluate_results($form){
     $answer8 = $_POST["input_8"];
 
     // the keys in the characters array correspond to the URLs of the character slugs
-    
+
     $characters = array(
       "strippenzieherin" => 0,
       "daten-sammlerin" => 0,
@@ -28,6 +28,8 @@ function wm_evaluate_results($form){
       "dokumentatorin" => 0,
       "spenderin" => 0
     );
+
+    // Switch statement used to assign weight to each answer
 
     $pass = false;
 
@@ -49,6 +51,7 @@ function wm_evaluate_results($form){
         $characters["aktivistin"] += 1000;
         $characters["technik-optimiererin"] += 1000;
         $characters["abfrage-genie"] += 1000;
+
         //Technik-Optimierer & Abfrage-Genie MUST have this answer)
         $pass = true;
         break;
@@ -137,13 +140,12 @@ function wm_evaluate_results($form){
     }
 
 
-
     /* Sort Function */
     $order = range(1,count($characters));
     array_multisort($characters, SORT_DESC, $order, SORT_ASC);
 
-
     $charactersNames = array_keys($characters);
+
     /* When top character is technik-optimiererin or "abfrage-genie" check if they pass Question 2
     If yes : assing them to chosen character, If no : go to the next */
 
