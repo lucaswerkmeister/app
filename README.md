@@ -42,7 +42,7 @@ $ gulp build
 - sitepress-multilingual-cms
 
 ### How to import ACF fields
-Find acf.json in the extras folder in the theme and import from the wordpress dashboard for the ACF fields from
+Find acf.json in the extras folder in the theme and import from the wordpress dashboard
 
 ## 1. How to create the form
 
