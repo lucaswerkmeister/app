@@ -46,13 +46,13 @@ Find acf.json in the extras folder in the theme and import from the wordpress da
 
 ## 1. How to create the form
 
-	•	Step 1: Create a new form or import the template form-template.json in the extras folder
-	•	Step 2: Each question should be added as a ‘Radio Buttons’ field. Add the question as the field name, and answers as options.
-	•	Step 3: Add an ID to each answer by checking the ‘show values’ checkbox and add values incrementally i.e. 1,2,3,4
-	•	Step 4: Make each question a required field.
-	•	Step 5: Choose to create a multipart form, and add a question on every section. For this, you would need to add a ‘Page Break’ field after every question.
-	•	Step 6: Use a hidden field to store the result. This will be used once the form is filled but before notifications are sent. Add this field at the end of the form in the last section.
-	•	Step 7: Add the form to your quiz page using the gravity forms shortcode.
+-	Step 1: Create a new form or import the template form-template.json in the extras folder
+-	Step 2: Each question should be added as a ‘Radio Buttons’ field. Add the question as the field name, and answers as options.
+-	Step 3: Add an ID to each answer by checking the ‘show values’ checkbox and add values incrementally i.e. 1,2,3,4
+-	Step 4: Make each question a required field.
+-	Step 5: Choose to create a multipart form, and add a question on every section. For this, you would need to add a ‘Page Break’ field after every question.
+-	Step 6: Use a hidden field to store the result. This will be used once the form is filled but before notifications are sent. Add this field at the end of the form in the last section.
+-	Step 7: Add the form to your quiz page using the gravity forms shortcode.
 
 ## 2. How to Evaluate and Display Results?
 
@@ -120,14 +120,14 @@ E.g. 1 When top character is technik-optimiererin or "abfrage-genie" check if th
 
 E.g. 2 Default character for points less than 10
 
-   if ($characters[$chosenCharacter] <= 10){
-      $chosenCharacter = "spenderin";
-   }
+     if ($characters[$chosenCharacter] <= 10){
+        $chosenCharacter = "spenderin";
+     }
 
 
 Finally set the value of the hidden field
 
-    $_POST["input_9"] = $chosenCharacter;
+     $_POST["input_9"] = $chosenCharacter;
 
 
 ### 2b. How to Display Results:
