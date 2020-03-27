@@ -134,31 +134,31 @@ Finally set the value of the hidden field
 
 Next we use the gform_after_submission hook to redirect to the page of the chosen character. We can also use the ICL_LANGUAGE_CODE option to map the the original URLs to different languages
 
-  add_action( 'gform_after_submission', 'wiki_redirect_after_submission' );
+    add_action( 'gform_after_submission', 'wiki_redirect_after_submission' );
 
-  function wiki_redirect_after_submission( $form ) {
+    function wiki_redirect_after_submission( $form ) {
 
-    $chosenCharacter = $_POST["input_9"];
+        $chosenCharacter = $_POST["input_9"];
 
-    if(ICL_LANGUAGE_CODE=='en'){
-      $slugs = array(
-        "strippenzieherin" => "stage-manager",
-        "daten-sammlerin" => "data-collector",
-        "star-autorin" => "literary-star",
-        "kulturagentin" => "cultural-ambassador",
-        "technik-optimiererin" => "tech-optimizer",
-        "abfrage-genie" => "master-of-queries",
-        "aktivistin" => "activist",
-        "dokumentatorin" => "documenter",
-        "spenderin" => "donor"
-      );
+        if(ICL_LANGUAGE_CODE=='en'){
+          $slugs = array(
+            "strippenzieherin" => "stage-manager",
+            "daten-sammlerin" => "data-collector",
+            "star-autorin" => "literary-star",
+            "kulturagentin" => "cultural-ambassador",
+            "technik-optimiererin" => "tech-optimizer",
+            "abfrage-genie" => "master-of-queries",
+            "aktivistin" => "activist",
+            "dokumentatorin" => "documenter",
+            "spenderin" => "donor"
+          );
 
-      $chosenCharacter = $slugs[$chosenCharacter];
-      $url = home_url().'gang/'.$chosenCharacter;
+          $chosenCharacter = $slugs[$chosenCharacter];
+          $url = home_url().'gang/'.$chosenCharacter;
+        }
+        else{
+          $url = home_url().'/gang/'.$chosenCharacter;
+        }
+
+        wp_redirect( $url ); exit;
     }
-    else{
-      $url = home_url().'/gang/'.$chosenCharacter;
-    }
-
-    wp_redirect( $url ); exit;
-  }
