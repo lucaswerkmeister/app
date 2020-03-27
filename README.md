@@ -2,7 +2,7 @@
 
 This quiz was built using Gravity Forms, Advanced Custom Fields and WPML. The answers are multiple-choice and are always displayed in a particular order. The results are based on the answers you choose.
 
-## How to install the theme and import
+## How to install the theme and import advanced custom fields
 
 ### Installation
 
