@@ -10,10 +10,10 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 
 ```bash
 # Clone this repository into your wordpress theme folder
-$ git clone https://github.com/jnds/wp-template-toolkit
+$ git clone https://github.com/jnds/app
 
 # Go into the repository
-$ cd wp-template-toolkit
+$ cd app
 
 # Install dependencies
 $ npm install
